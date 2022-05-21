@@ -24,8 +24,11 @@
 }
 #movie_card_sec{
   /* z-index: 22 !important; */
+  background: #000000;
+  /* color: #FFFF; */
+  padding-top: 10px;
 }
 #movie_img{
   width: 100%;
-  height: 100%;
+  height: auto;
 }

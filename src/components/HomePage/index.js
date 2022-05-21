@@ -7,11 +7,12 @@ import Hero from './Hero'
 
 function HomePage() {
 
+
     const addLike = (id) => {
         if (localStorage.getItem(`likes_of_${id}`)) {
             let likes = parseInt(localStorage.getItem(`likes_of_${id}`));
             localStorage.setItem(`likes_of_${id}`, likes + 1);
-            localStorage.setItem('you_liked', 1);
+            localStorage.setItem(`you_liked_${id}`, 1);
         } else {
             localStorage.setItem(`likes_of_${id}`, 1);
             localStorage.setItem(`you_liked_${id}`, 1);
@@ -22,25 +23,31 @@ function HomePage() {
         localStorage.setItem(`likes_of_${id}`, likes - 1);
         localStorage.setItem(`you_liked_${id}`, 0);
     }
+
+
+
     return (
         <>
             {/* <Nav /> */}
             <Hero />
-            <div className="container" id="movie_card_sec">
-                {movies.map((mov, index) => (
-                    <MovieCard
-                        key={mov.id}
-                        index={index}
-                        title={mov.title}
-                        description={mov.description}
-                        likes={localStorage.getItem(`likes_of_${mov.id}`) ? localStorage.getItem(`likes_of_${mov.id}`) : 0}
-                        poster={mov.poster}
-                        fee={mov.fee}
-                        removeLike={removeLike}
-                        addLike={addLike}
-                    />
-                ))}
-            </div>
+            <section id="movie_card_sec">
+                <div className="container">
+                    {movies.map((mov, index) => (
+                        <MovieCard
+                            key={mov.id}
+                            index={index}
+                            title={mov.title}
+                            description={mov.description}
+                            likes={localStorage.getItem(`likes_of_${index}`) ? localStorage.getItem(`likes_of_${index}`) : 0}
+                            poster={mov.poster}
+                            fee={mov.fee}
+                            removeLike={removeLike}
+                            addLike={addLike}
+                            checkLike={parseInt(localStorage.getItem(`you_liked_${index}`)) ? 1 : 0}
+                        />
+                    ))}
+                </div>
+            </section>
             <Foot />
         </>
     )
